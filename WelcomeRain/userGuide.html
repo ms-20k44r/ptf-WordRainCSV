@@ -1,0 +1,100 @@
+<!-- readme.html -->
+
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css">
+  <script src="https://kit.fontawesome.com/6c2dc82245.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="entry.css">
+</head>
+
+
+<body id="readme">
+  <header></header>
+
+  <article class="readmeContainer">
+
+    <h1>ユーザーガイド</h1>
+
+    <details class="details">
+      <!-- ↓summaryタグにdata-srcでfetchするソースを指定 タイトルはaccordion-titleに格納-->
+      <summary class="details-summary" data-src="e00.html"><span class="summary_inner"><span class="accordion-title">
+            <!-- Summary -->
+          </span><span class="icon-summary"></span></span></summary>
+      <div class="details-content">
+        <div class="content_inner">
+          <div class="overrideAccordion-content"></div><!--  ←読み込んだコンテンツはここに(クラスは読み込み後のCSS適用のため) -->
+          <div class="existingAccordion-content">
+            <!-- 既存のコンテンツ(アコーディオンの中身) -->
+            <!-- <p>Details :expanded accordion contant.</p> -->
+            <div class="common-content"></div><!-- ←共通コンテンツ。このクラスの全divにJSでコンテンツ組み込む -->
+            <button class="close-btn">close</button><!-- ←このアコーディオンを閉じるボタン -->
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details class="details">
+      <summary class="details-summary" data-src="e01.html"><span class="summary_inner"><span class="accordion-title">
+            <!-- Summary -->
+          </span><span class="icon-summary"></span></span></summary>
+      <div class="details-content">
+        <div class="content_inner">
+          <div class="overrideAccordion-content"></div>
+          <div class="existingAccordion-content">
+            <div class="common-content"></div>
+            <button class="close-btn">close</button>
+          </div>
+        </div>
+    </details>
+    <details class="details">
+      <summary class="details-summary" data-src="e02.html"><span class="summary_inner"><span class="accordion-title">
+            <!-- Summary -->
+          </span><span class="icon-summary"></span></span></summary>
+      <div class="details-content">
+        <div class="content_inner">
+          <div class="overrideAccordion-content"></div>
+          <div class="existingAccordion-content">
+            <div class="common-content"></div>
+            <button class="close-btn">close</button>
+          </div>
+        </div>
+    </details>
+    <details class="details">
+      <summary class="details-summary" data-src="e03.html"><span class="summary_inner"><span class="accordion-title">
+            <!-- Summary -->
+          </span><span class="icon-summary"></span></span></summary>
+      <div class="details-content">
+        <div class="content_inner">
+          <div class="overrideAccordion-content"></div>
+          <div class="existingAccordion-content">
+            <div class="common-content"></div>
+            <button class="close-btn">close</button>
+          </div>
+        </div>
+    </details>
+    <details class="details">
+      <summary class="details-summary" data-src="e04.html"><span class="summary_inner"><span class="accordion-title">
+            <!-- Summary -->
+          </span><span class="icon-summary"></span></span></summary>
+      <div class="details-content">
+        <div class="content_inner">
+          <div class="overrideAccordion-content"></div>
+          <div class="existingAccordion-content">
+            <div class="common-content"></div>
+            <button class="close-btn">close</button>
+          </div>
+        </div>
+    </details>
+
+  </article>
+
+  <footer></footer>
+  <script src='entry.js'></script>
+</body>
+
+</html>

@@ -1,0 +1,163 @@
+<!-- index.html -->
+
+
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css">
+  <script src="https://kit.fontawesome.com/6c2dc82245.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" integrity="sha512-dfX5uYVXzyU8+KHqj8bjo7UkOdg18PaOtpa48djpNbZHwExddghZ+ZmzWT06R5v6NSk3ZUfsH6FNEDepLx9hPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://unpkg.com/encoding-japanese@2.1.0/encoding.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="headder">
+    <div class="title textSelectNone" data-responsive="単語雨"><span class="csv-version">CSV版</span><span class="titleNode">単語雨 -Word Rain-</span></div>
+
+    <div class="paddig-frexbtn">
+      <button type="button" id="morePlayBtn" title="more drop">もっと降れ！</button>
+      <button type="button" id="openFileReadOptionModal" title="雨乞い"><i class="fa-solid fa-droplet"></i> 雨乞い</button>
+      <text class="tinyMessage morePlay">まだ降っていません<br>雨乞いをしましょう</text>
+      <button type="button" id="testBtn" title="test"><i class="fa-solid fa-chart-bar"></i></button>
+    </div>
+    <div class="frex">
+      <i id="bookmark" class="fa-solid fa-bookmark" title="bookmark"></i>
+      <i id="readme" class="fa-brands fa-readme" title="readme"></i>
+      <div><i id="setting" class="fa-solid fa-gear" title="setting"></i></div>
+    </div>
+  </div><!-- headder -->
+
+  <div class="bookmark-container">
+    <!-- お気に入りリストウィンドウ本体の囲み -->
+    <div class="bookmark-body">
+      <div class="bookmark-content">
+        <!-- コンテンツエリア -->
+        <div>ブックマーク</div>
+        <ul id="bmItemListContainer">
+        </ul>
+        <div><i id="bmAllDelete" class="fa-solid fa-trash"><span class="text"> 一括削除</span></i></div>
+      </div>
+    </div>
+  </div><!-- bookmark-container -->
+
+
+  <section>
+
+    <div id="field">
+      <text id="0" class="entry entry-medium" data-src="htnlSrc"><br>言葉の雨を降らせましょう</text>
+      <text id="1" class="entry entry-large" data-src="htnlSrc">あなたの言葉が、雨粒になります</text>
+      <text id="2" class="entry entry-medium" data-src="htnlSrc">とりあえず雨を降らせてみる</text>
+      <text id="3" class="entry  entry-small" data-src="htnlSrc">雨粒は掴むことができます<br>ほらタップしてみて！</text>
+      <text id="4" class="entry  entry-small" data-src="htnlSrc">一粒一粒に、多くの要素を含めます</text>
+    </div>
+
+    <div class="amagoi-container">
+      <!-- 雨乞いウィンドウ本体の囲み -->
+      <div class="amagoi-body">
+        <button type="button" class="amagoi-close">close</button><!-- 閉じるボタン -->
+        <div class="amagoi-content">
+          <!-- コンテンツエリア -->
+          <p id="dropArea" class="textSelectNone">CSVファイル をここにドロップしてください<br>または <br><input type="file" id="filePickerBtn" accept=".csv"></p>
+          <button type="button" id="useDemoDataBtn">デモデータを使用する</button><span id="InfoUseDemoData"></span>
+          <div id="csvTitle"></div>
+
+          <div class="titleSelectContainer">
+            タイトルに設定：<select id="titleSelect">
+              <option value=""></option>
+              <option value=""></option>
+              <option value=""></option>
+            </select>
+            <button type="button" id="titleChoicedBtn">OK</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-container">
+      <!-- 詳細ウィンドウ本体の囲み -->
+      <div class="modal-body">
+        <button type="button" class="modal-close">close</button><!-- 閉じるボタン -->
+        <div class="modal-content">
+          <!-- コンテンツエリア -->
+          <i id="itemBookmark" data-id="" class="fa-solid fa-bookmark"></i>
+          <div class="item-list">
+          </div>
+          <iframe class="iframeElement" src="" frameborder="0"></iframe>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="setting-container">
+      <!-- 設定ウィンドウ本体の囲み -->
+      <div class="setting-body">
+        <button type="button" class="setting-close">close</button><!-- 閉じるボタン -->
+        <div class="setting-content">
+          <!-- コンテンツエリア -->
+          <div class="subTitle">設定</div>
+          <div class="frex space-around">
+            <label for="oAmeSelect" class="oAmeSelect">雨の様子
+              <select id="oAmeSelect">
+                <option value="3500">小雨</option>
+                <option value="2000" selected>大雨</option>
+                <option value="1300">豪雨</option>
+              </select></label>
+            <div><label for="amatubuSlider">雨粒の大きさ</label><input id="amatubuSlider" type="range" name="amatubu" min="17" max="23" step="1" value="20"></div>
+          </div>
+          <fieldset id="fieldColorSetting">
+            <legend>カラー/スタイルの設定</legend>
+            <div id="colorSettingRadioBtnContainer">
+              <p><input type="radio" id="rb0" name="colorMode" value="light">
+                <label for="rb0">ライトモード</label>
+              </p>
+              <p><input type="radio" id="rb1" name="colorMode" value="dark">
+                <label for="rb1">ダークモード</label>
+              </p>
+              <p><input type="radio" id="rb2" name="colorMode" value="original" checked>
+                <label for="rb2">オリジナル</label>
+              </p>
+            </div>
+          </fieldset>
+          <fieldset id="fieldPropVisibility">
+            <legend>各プロパティの表示/非表示を設定</legend>
+            <div id="propVisibilityCheckBoxContainer">
+            </div>
+          </fieldset>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="readme-container">
+      <!-- ユーザーガイドウィンドウ本体の囲み -->
+      <div class="readme-body">
+        <button type="button" class="readme-close">close</button><!-- 閉じるボタン -->
+        <div class="readme-content">
+          <!-- コンテンツエリア -->
+          <iframe class="iframeReadme" src="" frameborder="0"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div id="observer" class=""></div>
+  </section>
+
+  <div class="footer">
+    <div id="credit">
+      <div>©2024 よんある</div><i class="fa-brands fa-github" title="Github"></i>
+      <div class="copy-container"><i class="fa-solid fa-envelope copyButton" data-text="***@gmail.com" title="copy Gmail address"></i></div>
+    </div>
+  </div><!-- footer -->
+
+  <script src='demoOrgData.js'></script>
+  <script src='main.js'></script>
+</body>
+
+</html>
