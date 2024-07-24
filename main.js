@@ -18,7 +18,6 @@ const dropArea = document.getElementById("dropArea");
 const useDemoDataBtn = document.getElementById("useDemoDataBtn");
 const titleChoicedBtn = document.getElementById("titleChoicedBtn");
 const morePlayBtn = document.getElementById("morePlayBtn");
-const testBtn = document.getElementById("testBtn");
 const ditalesContainer = document.querySelector(".modal-container");
 const ditalesBoby = document.querySelector(".modal-body");
 const ditalesCloseBtn = document.querySelector(".modal-close");
@@ -46,6 +45,11 @@ const bookmarkContent = document.querySelector(".bookmark-content");
 const bmItemListContainer = document.querySelector("#bmItemListContainer");
 const fa_github = document.querySelector(".fa-github");
 const iframeElement = document.querySelector(".iframeElement");
+const readmeContainer = document.querySelector(".readme-container");
+const readmeBoby = document.querySelector(".readme-body");
+const readmeCloseBtn = document.querySelector(".readme-close");
+const readmeContent = document.querySelector(".readme-content");
+const readme = document.querySelector("#readme");
 
 let raining = false;
 let oAmeOption = 2000;
@@ -64,6 +68,7 @@ let entryDataRaining = true;
 
 window.addEventListener("load", () => {
     console.log("loaded.");
+    updateResponsive();
     settingApply();
     entrySetting();
 });
@@ -102,9 +107,6 @@ function settingApply() {
         });
     }
 }
-testBtn.addEventListener("click", () => {
-    console.log(bookmarkItemList);
-});
 amatubuSlider.addEventListener("input", (e) => {
     document.documentElement.style.setProperty("--fontSixe-middle", `${e.target.value}px`); //CSSの:rootセレクタのstyle
 });
@@ -453,6 +455,25 @@ settingContainer.onclick = (e) => {
     //モーダルのグレー背景押下でも画面を閉じる
     if (!e.target.closest(".setting-body")) {
         settingContainer.classList.remove("active");
+    }
+};
+//ユーザーガイドの表示/非表示を切り替え
+let isFirstTime = true;
+const iframeReadme = document.querySelector(".iframeReadme");
+
+readme.onclick = () => {
+    if (isFirstTime) {
+        iframeReadme.src = `./entryContent/readme.html`;
+        isFirstTime = false;
+    }
+    readmeContainer.classList.add("active");
+};
+readmeCloseBtn.onclick = () => {
+    readmeContainer.classList.remove("active");
+};
+readmeContainer.onclick = (e) => {
+    if (!e.target.closest(".readme-body")) {
+        readmeContainer.classList.remove("active");
     }
 };
 //ブックマークリストの表示/非表示を切り替え
@@ -1017,6 +1038,31 @@ document.querySelectorAll(".copyButton").forEach((button) => {
     });
 });
 
+//レスポンシブコンテンツ
+const dataResponsiveValue = title.dataset.responsive; //単語雨
+const csvVersionText = document.querySelector(".csv-version").textContent; //CSV版
+const titleNode = document.querySelector(".titleNode").textContent; //単語雨 -Word Rain-
+const updateResponsive = () => {
+    if (window.innerWidth <= 480) {
+        //テキスト内容変更
+        document.querySelector(".titleNode").textContent = dataResponsiveValue;
+        openFileReadOptionModal.innerHTML = `<i class="fa-solid fa-droplet"></i>`;
+        //スマホサイズ。ボタンをアイコンに。
+    } else if (window.innerWidth <= 700) {
+        //テキスト内容変更
+        document.querySelector(".titleNode").textContent = dataResponsiveValue;
+        openFileReadOptionModal.innerHTML = `<i class="fa-solid fa-droplet"></i> 雨乞い`;
+        //通常のテキストボタン
+    } else {
+        //700以上
+        //通常のテキスト内容
+        document.querySelector(".titleNode").textContent = titleNode;
+        openFileReadOptionModal.innerHTML = `<i class="fa-solid fa-droplet"></i> 雨乞い`;
+        //通常のテキストボタン
+    }
+};
+window.addEventListener("resize", updateResponsive);
+
 //制作者情報の表示
 function openGithub() {
     window.open("https://github.com/ms-20k44r");
@@ -1069,7 +1115,7 @@ const entrySetting = () => {
     orgData = entryData;
     myObjArray = entryData;
     firstEntryAnim();
-    //!テスト用に全てのentryデータを初期状態でブックマークに追加
+    //!全てのentryデータを初期状態でブックマークに追加
     let data = document.querySelectorAll(".entry");
     data.forEach((item) => {
         bookmarkItemList.push(item.id);
